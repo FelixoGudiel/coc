@@ -37,5 +37,9 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<div>
+	<c:out value="wa"></c:out>
+	<c:out value="${message}"></c:out>
+</div>
 </body>
 </html>
