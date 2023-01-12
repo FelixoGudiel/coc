@@ -19,6 +19,9 @@ public class Gamer {
 	private Integer id;
 
     @Column
+    private String tag;
+
+    @Column
     private String nombre;
 
     @Column
