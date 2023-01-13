@@ -14,60 +14,38 @@
 						<script src="/webjars/jquery/jquery.min.js"></script>
 						<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 
-						<ocaParchis:layout pageName="Asaltos">
+						<ocaParchis:layout pageName="Clan">
 							<title>CocAPIC</title>
 					</head>
 
 					<body style="background-color:#ececec">
 						<div>
-							<h1 style="font-family:monospace">&nbsp;Asaltos Info</h1>
+							<h1 style="font-family:monospace">&nbsp;Clan Info</h1>
 							<div style=" float: left;">
 								<table class="table table-striped">
 									<tr>
-										<th>Fecha Asalto</th>
-										<th>Monedas Ganadas</th>
-										<th>Distritos Tirados</th>
-										<th>Oro de Capital</th>
+										<th>Nombre</th>
+										<th>Donado</th>
+										<th>Rol</th>
+										<th>Etiqueta</th>
+										<th>Tag</th>
 									</tr>
-									<c:forEach items="${asaltos}" var="asalto">
+									<c:forEach items="${members}" var="miembro">
 										<tr>
 											<td>
-												<c:out value="{asalto.fecha}"></c:out>
+												<c:out value="${miembro.nombre}"></c:out>
 											</td>
 											<td>
-												<c:out value="{asalto.monedasGanadas}"></c:out>
+												<c:out value="${miembro.donado}"></c:out>
 											</td>
 											<td>
-												<c:out value="{asalto.distritosTumbados}"></c:out>
+												<c:out value="${miembro.rol}"></c:out>
 											</td>
 											<td>
-												<c:out value="{asalto.oroCapital}"></c:out>
-											</td>
-										</tr>
-									</c:forEach>
-								</table>
-							</div>
-							<div style=" float: right;">
-								<table class="table table-striped">
-									<tr>
-										<th>Fecha Asalto</th>
-										<th>Monedas Ganadas</th>
-										<th>Distritos Tirados</th>
-										<th>Oro de Capital</th>
-									</tr>
-									<c:forEach items="${asaltos}" var="asalto">
-										<tr>
-											<td>
-												<c:out value="{asalto.fecha}"></c:out>
+												<c:out value="${miembro.etiqueta}"></c:out>
 											</td>
 											<td>
-												<c:out value="{asalto.monedasGanadas}"></c:out>
-											</td>
-											<td>
-												<c:out value="{asalto.distritosTumbados}"></c:out>
-											</td>
-											<td>
-												<c:out value="{asalto.oroCapital}"></c:out>
+												<c:out value="${miembro.tag}"></c:out>
 											</td>
 										</tr>
 									</c:forEach>

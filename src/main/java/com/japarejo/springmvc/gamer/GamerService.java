@@ -18,7 +18,7 @@ public class GamerService {
 	private GamerRepository gamerRepo;
     
     public void gamerAPI(String playerTag) throws IOException{
-        if (gamerRepo.findbyTag(playerTag)!=null)return;
+   
         try {
             String urlPlayerTag =playerTag.replace("#", "%23");
             URL url = new URL("https://api.clashofclans.com/v1/players/" + urlPlayerTag+ "?authorization=Bearer:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImUwNzkyZTUzLWZlMDgtNGY5Mi05ZjcwLWNlZjJiMjQ4ZTc2NyIsImlhdCI6MTY3MzQ2NDU1Miwic3ViIjoiZGV2ZWxvcGVyL2IyYWJiMGZhLTBmZjAtNjdjMC0xZjIxLTBjNWIzMjNhNjczMiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjgxLjM2LjIzNC42MCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.heum3wpHm-M8doUi59vjPhMyyBsxDDOR_8jNxmp0rEVF6EZcVrbStHEE2giwunSb7ImQRjsXNS7AsmyUIo5y2Q");
@@ -33,10 +33,16 @@ public class GamerService {
             scanner.close();
  
             String raw = info.substring(0);
-
-            Gamer gamerToAdd = new Gamer();
+            Gamer gamerToAdd = null;
+            Boolean newGamer = false;
+            if (gamerRepo.findbyTag(playerTag)!=null){
+                gamerToAdd = gamerRepo.findbyTag(playerTag);
+            }
+            else{
+            gamerToAdd = new Gamer();
             gamerToAdd.setTag(playerTag);
-
+            newGamer=true;
+            }
             String[] partes = raw.split(",");
             Boolean nameSelected = false;
             for (String parte : partes){
@@ -58,7 +64,9 @@ public class GamerService {
                     gamerToAdd.setDonado(Integer.valueOf(parte.trim()));
                 }
             }
+            if (newGamer){
             gamerToAdd.setEtiqueta("Desconocido");
+            }
             gamerRepo.save(gamerToAdd);
         } catch (MalformedURLException e) {
             e.printStackTrace();

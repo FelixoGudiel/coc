@@ -15,7 +15,7 @@
 <nav class="navbar navbar-inverse" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="<spring:url value="/" htmlEscape="true" />"><span style="font-family: 'Fredoka One', cursive; font-size: 30px; color:#d9534f">Oca & Parchis</span></a>
+			<a class="navbar-brand" href="<spring:url value="/" htmlEscape="true" />"><span style="font-family: 'Impact', cursive; font-size: 30px; color:#FFFA8E">COCAPIC</span></a>
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target="#main-navbar">
 				<span class="sr-only"><os-p>Toggle navigation</os-p></span> <span
@@ -39,46 +39,15 @@
 			
 				<ocaParchis:menuItem active="${name eq 'Asaltos'}" url="/asaltos"
 					title="Asaltos">
-					<spring:url value="/resources/images/people.png" htmlEscape="true" var="peopleImage"/>
-						<img src="${peopleImage}" width="16" height="16"/></span>
+					<spring:url value="/resources/images/espadas.png" htmlEscape="true" var="espadas"/>
+						<img src="${espadas}" width="16" height="16"/></span>
 					<span>Asaltos</span>
 				</ocaParchis:menuItem>
-
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown"> <spring:url value="/resources/images/stats.png" htmlEscape="true" var="statsImage"/>
-						<img src="${statsImage}" width="16" height="16"/> Stats
-							<span class="glyphicon glyphicon-chevron-down"></span>
-					</a>
-						<ul class="dropdown-menu">
-							<li>
-								<ocaParchis:menuItem active="${name eq 'My stats'}" url="/playerstats"
-								title="My stats">
-								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-								<span>My stats</span>
-								</ocaParchis:menuItem>
-							</li>
-							<li class="divider"></li>							
-                            <li> 
-								<ocaParchis:menuItem active="${name eq 'Global Stats'}" url="/playerstats/global"
-								title="Global Stats">
-								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-								<span>Global</span>
-								</ocaParchis:menuItem>
-							</li>
-							<li class="divider"></li>							
-                            <li> 
-								<ocaParchis:menuItem active="${name eq 'Ranking'}" url="/playerstats/ranking?wins=true"
-								title="Ranking">
-								<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-								<span>Ranking</span>
-								</ocaParchis:menuItem>
-							</li>
-						</ul></li>
 				
-				<ocaParchis:menuItem active="${name eq 'Achievements'}" url="/achievements"
-					title="Achievements">
+				<ocaParchis:menuItem active="${name eq 'Clan'}" url="/clan"
+					title="Clan">
 					<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-					<span>Achievements</span>
+					<span>Clan</span>
 				</ocaParchis:menuItem>
 
 			</ul>

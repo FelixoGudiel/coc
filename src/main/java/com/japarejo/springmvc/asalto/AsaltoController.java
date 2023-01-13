@@ -34,7 +34,7 @@ public class AsaltoController {
 
     @GetMapping("/añadirAsalto")
     public ModelAndView pruebillaRoom() throws IOException {
-        ModelAndView result = new ModelAndView(ASALTO_INFO);
+        ModelAndView result = new ModelAndView("redirect:/asaltos");
 
         String raw = asaltoService.asaltoAPI();
         String rawTrimmed = asaltoService.recorteBasico(raw);
@@ -46,8 +46,12 @@ public class AsaltoController {
         ultimoAsalto.setMonedasGanadas(asaltoService.parseOroCapital(rawTrimmed));
        
         result.addObject("message", rawTrimmed);
-        if (asaltoService.hayAsaltoReciente(ultimoAsalto.getFecha()) || !asaltoService.asaltoEnProceso(rawTrimmed)) {
-            result.addObject("message", "sucka!");
+        if (asaltoService.hayAsaltoReciente(ultimoAsalto.getFecha())) {
+            result.addObject("message", "El último asalto ya está registrado, espera a que termine el próximo asalto");
+            return result;
+        }
+        if (asaltoService.asaltoEnProceso(rawTrimmed)){
+            result.addObject("message", "Hay un asalto en proceso, espera a que termine");
             return result;
         }
         gamerRecordService.parseGamerRecord(rawTrimmed, ultimoAsalto);
@@ -64,6 +68,11 @@ public class AsaltoController {
     @GetMapping("/analisis")
     public ModelAndView analisisAsaltos() throws IOException{
         ModelAndView result = new ModelAndView(ASALTO_INFO);
+        if (asaltoService.findAll().size()==0){
+            result = new ModelAndView("redirect:/asaltos");
+            result.addObject("message", "No hay suficientes asaltos");
+            return result;
+        }
         gamerService.clanAPI();
         List<String> morosos = new ArrayList<>();
         List<Gamer> trabajadores = asaltoService.trabajadores(0);
