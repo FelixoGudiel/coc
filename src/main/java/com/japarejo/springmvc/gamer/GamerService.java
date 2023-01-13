@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 
@@ -49,7 +48,7 @@ public class GamerService {
                 if (parte.contains("name") && !nameSelected){
                     parte=parte.replace("name\":\"", "");
                     parte=parte.replace("\"", "");
-                    parte=parte.replace("™", "");
+                    parte=parte.replace("™", "?");
                     gamerToAdd.setNombre(parte);
                     nameSelected=true;
                 }
@@ -104,5 +103,19 @@ public class GamerService {
 
     public List<Gamer> findAll(){
         return gamerRepo.findAll();
+    }
+
+    public Gamer findByTag(String tag){
+        return gamerRepo.findbyTag(tag);
+    }
+
+    public Gamer findById(Integer id){
+        if (gamerRepo.findById(id).isPresent())
+        return gamerRepo.findById(id).get();
+        return null;
+    }
+
+    public void save(Gamer g){
+        gamerRepo.save(g);
     }
 }

@@ -2,7 +2,6 @@ package com.japarejo.springmvc.asalto;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +12,10 @@ import static java.time.temporal.ChronoUnit.DAYS;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 import com.japarejo.springmvc.gamer.Gamer;
 import com.japarejo.springmvc.gamerRecord.GamerRecord;
-import com.jayway.jsonpath.internal.function.text.Length;
 
 @Service
 public class AsaltoService {
