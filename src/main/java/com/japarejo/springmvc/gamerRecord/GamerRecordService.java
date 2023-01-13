@@ -1,9 +1,11 @@
 package com.japarejo.springmvc.gamerRecord;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.japarejo.springmvc.asalto.Asalto;
 import com.japarejo.springmvc.gamer.GamerRepository;
@@ -19,7 +21,8 @@ public class GamerRecordService {
     @Autowired
 	private GamerService gamerService;
     
-    public String parseGamerRecord(String raw, Asalto asalto) throws IOException {
+    @Transactional
+    public void parseGamerRecord(String raw, Asalto asalto) throws IOException {
 		Integer comienzoMiembros = raw.indexOf("members");
 		Integer finalMiembros = raw.indexOf("attackLog");
         String rawTrimmed = raw.substring(comienzoMiembros+ ("members':[").length(), finalMiembros-("],'").length());
@@ -49,6 +52,10 @@ public class GamerRecordService {
             gamerRecordToAdd.setAsalto(asalto);
             gamerRecordRepo.save(gamerRecordToAdd);
         }
-        return Integer.valueOf(members.length).toString();
+        return;
+    }
+
+    public List<GamerRecord> findByAsalto(Asalto asalto){
+        return gamerRecordRepo.findByAsalto(asalto);
     }
 }

@@ -1,5 +1,6 @@
 package com.japarejo.springmvc.asalto;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -15,6 +16,8 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
+import com.japarejo.springmvc.gamer.Gamer;
+import com.japarejo.springmvc.gamerRecord.GamerRecord;
 import com.jayway.jsonpath.internal.function.text.Length;
 
 @Service
@@ -75,6 +78,13 @@ public class AsaltoService {
         return Integer.valueOf(trimmedRaw.substring(comienzoDistritos + ("enemyDistrictsDestroyed':").length(),finalDistritos - (",'").length()));
     }
 
+    public Integer parseOroCapital(String trimmedRaw) {
+        Integer comienzoOroCapital = trimmedRaw.indexOf("capitalTotalLoot");
+        Integer finalOroCapital = trimmedRaw.indexOf("raidsCompleted");
+
+        return Integer.valueOf(trimmedRaw.substring(comienzoOroCapital + ("capitalTotalLoot':").length(),finalOroCapital - (",'").length()));
+    }
+
     public boolean hayAsaltoReciente(LocalDate fecha) {
         for (Asalto a : asaltoRepo.findAll()){
             if (DAYS.between(a.getFecha(), fecha)<6)
@@ -83,6 +93,28 @@ public class AsaltoService {
         return false;
     }
 
+    public List<Asalto> findAll() {
+        return asaltoRepo.findAll();
+     }
+
+     public Boolean asaltoEnProceso(String rawTrimmed) {
+        return rawTrimmed.contains("ongoing");
+     }
+
+    public List<Asalto> orderFecha() {
+        return asaltoRepo.orderFecha();
+    }
+
+    public List<Gamer> trabajadores(Integer semanasIgnorables){
+        List<Gamer> currantes = new ArrayList<>();
+        for (Integer i=0; i<=semanasIgnorables; i++){
+            for (GamerRecord gr : orderFecha().get(i).getGamerRecord()){
+                Gamer gamerAdd = gr.getGamer();
+                if (!currantes.contains(gamerAdd))currantes.add(gamerAdd);
+            }
+        }
+        return currantes;
+    }
     @Transactional
     public void save(Asalto asalto) {
        asaltoRepo.save(asalto);

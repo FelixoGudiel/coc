@@ -14,10 +14,10 @@
 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 
 <ocaParchis:layout pageName="home">
-	<title>Parchis and Oca</title>
+	<title>CocAPIC</title>
 	</head>
 	<body style="background-color:#ececec">
-		<h1 style="font-family:monospace" align="middle">&nbsp;Welcome to the Parchis and Oca games</h1>
+		<h1 style="font-family:monospace" align="middle">&nbsp;CocApiC</h1>
 	</body>
 </ocaParchis:layout>
 </html>
