@@ -37,6 +37,9 @@ public class Asalto {
     private Integer oroCapital;
 
     @Column
+    private Integer copasCapital;
+
+    @Column
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fecha;
     

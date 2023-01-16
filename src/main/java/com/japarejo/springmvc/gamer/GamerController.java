@@ -25,10 +25,11 @@ public class GamerController {
 
     public static final String CLAN = "Clan";
     public static final String PROMOTION = "Promotion";
+
     @GetMapping()
     public ModelAndView clan() throws IOException {
         ModelAndView result = new ModelAndView(CLAN);
-        result.addObject("members", gamerService.findAll());
+        result.addObject("members", gamerService.clanMembers());
         return result;
     }
 
@@ -42,7 +43,7 @@ public class GamerController {
     @GetMapping("/promote")
     public ModelAndView promoteSelect() throws IOException {
         ModelAndView result = new ModelAndView(PROMOTION);
-        result.addObject("members", gamerService.findAll());
+        result.addObject("members", gamerService.clanMembers());
         return result;
     }
     @GetMapping("/promote/{id}")

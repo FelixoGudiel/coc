@@ -21,96 +21,86 @@
 					<body style="background-color:#ececec">
 						<div>
 							<h1 style="font-family:monospace">&nbsp;Clan Info</h1>
-							<div>	
-									<a class="btn btn-danger" href="/clan/update">Actualizar</a>
-									<div style="float:right">
+							<div>
+								<a class="btn btn-danger" href="/clan/update">Actualizar</a>
+								<div style="float:right">
 									<a class="btn btn-danger" href="/clan/promote">Cambiar etiquetas</a>
-									</div>
+								</div>
 							</div>
 							<br>
-							<div style=" float: left; padding: 5px">
-								<table class="table table-striped">
-									<tr>
-										<th>Nombre</th>
-										<th>Donado</th>
-										<th>Etiqueta</th>
-										<th>Tag</th>
-									</tr>
-									<c:forEach items="${members}" var="miembro" varStatus="status">
-										<c:if test="${status.index<17}">
-											<tr>
-												<td>
-													<c:out value="${miembro.nombre}"></c:out>
-												</td>
-												<td>
-													<c:out value="${miembro.donado}"></c:out>
-												</td>
-												<td>
-													<c:out value="${miembro.etiqueta}"></c:out>
-												</td>
-												<td>
-													<c:out value="${miembro.tag}"></c:out>
-												</td>
-											</tr>
-										</c:if>
-									</c:forEach>
-								</table>
-							</div>
-							<div style=" float: left; padding: 5px">
-								<table class="table table-striped">
-									<tr>
-										<th>Nombre</th>
-										<th>Donado</th>
-										<th>Etiqueta</th>
-										<th>Tag</th>
-									</tr>
-									<c:forEach items="${members}" var="miembro" varStatus="status">
-										<c:if test="${status.index>=17 && status.index<34}">
-											<tr>
-												<td>
-													<c:out value="${miembro.nombre}"></c:out>
-												</td>
-												<td>
-													<c:out value="${miembro.donado}"></c:out>
-												</td>
-												<td>
-													<c:out value="${miembro.etiqueta}"></c:out>
-												</td>
-												<td>
-													<c:out value="${miembro.tag}"></c:out>
-												</td>
-											</tr>
-										</c:if>
-									</c:forEach>
-								</table>
-							</div>
-							<div style=" float: left; padding: 5px;">
-								<table class="table table-striped">
-									<tr>
-										<th>Nombre</th>
-										<th>Donado</th>
-										<th>Etiqueta</th>
-										<th>Tag</th>
-									</tr>
-									<c:forEach items="${members}" var="miembro" varStatus="status">
-										<c:if test="${status.index>=34}">
-											<tr>
-												<td>
-													<c:out value="${miembro.nombre}"></c:out>
-												</td>
-												<td>
-													<c:out value="${miembro.donado}"></c:out>
-												</td>
-												<td>
-													<c:out value="${miembro.etiqueta}"></c:out>
-												</td>
-												<td>
-													<c:out value="${miembro.tag}"></c:out>
-												</td>
-											</tr>
-										</c:if>
-									</c:forEach>
-								</table>
+							<div style="align-items: center;">
+								<div style=" float: left; padding: 10px">
+									<table class="table table-striped">
+										<tr>
+											<th style="width:175px">Nombre</th>
+											<th>Donado</th>
+											<th>Etiqueta</th>
+										</tr>
+										<c:forEach items="${members}" var="miembro" varStatus="status">
+											<c:if test="${status.index<17}">
+												<tr>
+													<td>
+														<c:out value="${miembro.nombre}"></c:out>
+													</td>
+													<td>
+														<c:out value="${miembro.donado}"></c:out>
+													</td>
+													<td>
+														<c:out value="${miembro.etiqueta}"></c:out>
+													</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</table>
+								</div>
+								<div style=" float: left; padding: 10px">
+									<table class="table table-striped">
+										<tr>
+											<th style="width:175px">Nombre</th>
+											<th>Donado</th>
+											<th>Etiqueta</th>
+										</tr>
+										<c:forEach items="${members}" var="miembro" varStatus="status">
+											<c:if test="${status.index>=17 && status.index<34}">
+												<tr>
+													<td>
+														<c:out value="${miembro.nombre}"></c:out>
+													</td>
+													<td>
+														<c:out value="${miembro.donado}"></c:out>
+													</td>
+													<td>
+														<c:out value="${miembro.etiqueta}"></c:out>
+													</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</table>
+								</div>
+								<div style=" float: left; padding: 10px;">
+									<table class="table table-striped">
+										<tr>
+											<th style="width:175px">Nombre</th>
+											<th>Donado</th>
+											<th>Etiqueta</th>
+										</tr>
+										<c:forEach items="${members}" var="miembro" varStatus="status">
+											<c:if test="${status.index>=34}">
+												<tr>
+													<td>
+														<c:out value="${miembro.nombre}"></c:out>
+													</td>
+													<td>
+														<c:out value="${miembro.donado}"></c:out>
+													</td>
+													<td>
+														<c:out value="${miembro.etiqueta}"></c:out>
+													</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</table>
+								</div>
 							</div>
 						</div>
 					</body>

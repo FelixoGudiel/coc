@@ -13,9 +13,9 @@
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
 <nav class="navbar navbar-inverse" role="navigation">
-	<div class="container">
+	<div class="container" style ="position:relative">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="<spring:url value="/" htmlEscape="true" />"><span style="font-family: 'Impact', cursive; font-size: 30px; color:#FFFA8E">COCAPIC</span></a>
+			<a class="navbar-brand" href="<spring:url value="/" htmlEscape="true" />"><span style="font-family: 'Impact', cursive; font-size: 30px; color:#1b8a37">POPUCOC</span></a>
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target="#main-navbar">
 				<span class="sr-only"><os-p>Toggle navigation</os-p></span> <span
@@ -26,8 +26,8 @@
 		<div class="navbar-collapse collapse" id="main-navbar">
 			<ul class="nav navbar-nav">
 				<li>
-					<spring:url value="/resources/images/logo.png" htmlEscape="true" var="logoImage"/>
-				<img src="${logoImage}" style="margin-top: 10px; margin-right: 5px;" width="35" height="35"/></span>
+					<spring:url value="/resources/images/monchis.png" htmlEscape="true" var="logoImage"/>
+				<img src="${logoImage}" style="margin-top: 0px; margin-right: 5px;" width="50" height="50"/></span>
 				</li>
 				<ocaParchis:menuItem active="${name eq 'home'}" url="/"
 					title="home page">

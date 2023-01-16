@@ -7,12 +7,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.japarejo.springmvc.gamer.Gamer;
 import com.japarejo.springmvc.gamer.GamerService;
 import com.japarejo.springmvc.gamerRecord.GamerRecordService;
+
+import javassist.expr.NewArray;
 
 @Controller
 @RequestMapping("/asaltos")
@@ -26,9 +29,10 @@ public class AsaltoController {
     GamerRecordService gamerRecordService;
 
     public static final String ASALTO_INFO = "AsaltoInfo";
+    public static final String ASALTO_ANALISIS = "Analisis";
 
-    @GetMapping("/añadirAsalto")
-    public ModelAndView pruebillaRoom() throws IOException {
+    @GetMapping("/addAsalto")
+    public ModelAndView añadirUltimoAsalto() throws IOException {
         ModelAndView result = new ModelAndView("redirect:/asaltos");
 
         String raw = asaltoService.asaltoAPI();
@@ -38,14 +42,14 @@ public class AsaltoController {
         ultimoAsalto.setDistritosTumbados(asaltoService.parseDistritos(rawTrimmed));
         ultimoAsalto.setMonedasGanadas(asaltoService.parseMonedas(rawTrimmed));
         ultimoAsalto.setFecha(asaltoService.parseFecha(rawTrimmed));
-        ultimoAsalto.setMonedasGanadas(asaltoService.parseOroCapital(rawTrimmed));
-       
-        result.addObject("message", rawTrimmed);
+        ultimoAsalto.setOroCapital(asaltoService.parseOroCapital(rawTrimmed));
+        ultimoAsalto.setCopasCapital(asaltoService.copasAPI());
+
         if (asaltoService.hayAsaltoReciente(ultimoAsalto.getFecha())) {
             result.addObject("message", "El último asalto ya está registrado, espera a que termine el próximo asalto");
             return result;
         }
-        if (asaltoService.asaltoEnProceso(rawTrimmed)){
+        if (asaltoService.asaltoEnProceso(rawTrimmed)) {
             result.addObject("message", "Hay un asalto en proceso, espera a que termine");
             return result;
         }
@@ -55,26 +59,78 @@ public class AsaltoController {
     }
 
     @GetMapping()
-    public ModelAndView infoAsaltos(){
+    public ModelAndView infoAsaltos() {
         ModelAndView result = new ModelAndView(ASALTO_INFO);
-        result.addObject("asaltos", asaltoService.findAll());
+        result.addObject("asaltos", asaltoService.orderFecha());
+        List<Integer> OroRecord = new ArrayList<>();
+        List<Integer> MonedasRecord = new ArrayList<>();
+        List<Integer> DistritosRecord = new ArrayList<>();
+        List<Integer> AtacantesRecord = new ArrayList<>();
+        List<Integer> CopasRecord = new ArrayList<>();
+        for (Asalto a : asaltoService.findAll()) {
+            OroRecord.add(a.getOroCapital());
+            MonedasRecord.add(a.getMonedasGanadas());
+            DistritosRecord.add(a.getDistritosTumbados());
+            AtacantesRecord.add(a.getGamerRecord().size());
+            CopasRecord.add(a.getCopasCapital());
+        }
+        result.addObject("OroRecord", OroRecord);
+        result.addObject("MonedasRecord", MonedasRecord);
+        result.addObject("DistritosRecord", DistritosRecord);
+        result.addObject("AtacantesRecord", AtacantesRecord);
+        result.addObject("CopasRecord", CopasRecord);
         return result;
     }
-    @GetMapping("/analisis")
-    public ModelAndView analisisAsaltos() throws IOException{
-        ModelAndView result = new ModelAndView(ASALTO_INFO);
-        if (asaltoService.findAll().size()==0){
+
+    @GetMapping("/analisis/{semanas}")
+    public ModelAndView analisisAsaltos(@PathVariable("semanas") Integer semanas) throws IOException {
+        ModelAndView result = new ModelAndView(ASALTO_ANALISIS);
+        if (asaltoService.findAll().size() == 0) {
             result = new ModelAndView("redirect:/asaltos");
             result.addObject("message", "No hay suficientes asaltos");
             return result;
         }
-        gamerService.clanAPI();
+        // gamerService.clanAPI();
         List<String> morosos = new ArrayList<>();
-        List<Gamer> trabajadores = asaltoService.trabajadores(0);
-        for (Gamer g :gamerService.findAll()){
-            if (!trabajadores.contains(g)) morosos.add(g.getNombre());
+        List<String> avisar = new ArrayList<>();
+        List<Gamer> trabajadores = asaltoService.trabajadores(semanas);
+        for (Gamer g : gamerService.clanMembers()) {
+            if (!trabajadores.contains(g) && g.getEtiqueta().equals("Desconocido") && g.getRol().equals("member"))
+                morosos.add(g.getNombre());
+            if (!trabajadores.contains(g) && !g.getEtiqueta().equals("Desconocido"))
+                avisar.add(g.getNombre());
         }
-        result.addObject("message", morosos);
+        Integer ratioAtacanteOro = asaltoService.ratioAtacanteOro(semanas);
+        Integer ratioAtacanteMonedas = asaltoService.ratioAtacanteMonedas(semanas);
+        Integer progresoCopas = asaltoService.progresoCopas(semanas);
+        Asalto asaltoReciente = asaltoService.orderFecha().get(0);
+        String dirLiga = "";
+        if (asaltoReciente.getCopasCapital() >= 0)
+            dirLiga = "no";
+        if (asaltoReciente.getCopasCapital() >= 400)
+            dirLiga = "bronze";
+        if (asaltoReciente.getCopasCapital() >= 800)
+            dirLiga = "silver";
+        if (asaltoReciente.getCopasCapital() >= 1400)
+            dirLiga = "gold";
+        if (asaltoReciente.getCopasCapital() >= 2000)
+            dirLiga = "cristal";
+        if (asaltoReciente.getCopasCapital() >= 2600)
+            dirLiga = "maestro";
+        if (asaltoReciente.getCopasCapital() >= 3200)
+            dirLiga = "campeon";
+        if (asaltoReciente.getCopasCapital() >= 4100)
+            dirLiga = "titan";
+        if (asaltoReciente.getCopasCapital() >= 5000)
+            dirLiga = "leyenda";
+
+        result.addObject("morosos", morosos);
+        result.addObject("avisar", avisar);
+        result.addObject("ratioAtacanteOro", ratioAtacanteOro);
+        result.addObject("ratioAtacanteMonedas", ratioAtacanteMonedas);
+        result.addObject("progresoCopas", progresoCopas);
+        result.addObject("asaltoReciente", asaltoService.orderFecha().get(0));
+        result.addObject("dirLiga", dirLiga);
         return result;
     }
 }
