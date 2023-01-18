@@ -1,6 +1,7 @@
 package com.japarejo.springmvc.asalto;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,34 +104,29 @@ public class AsaltoController {
         Integer ratioAtacanteOro = asaltoService.ratioAtacanteOro(semanas);
         Integer ratioAtacanteMonedas = asaltoService.ratioAtacanteMonedas(semanas);
         Integer progresoCopas = asaltoService.progresoCopas(semanas);
+        Double porcentaje = (double)trabajadores.size()/gamerService.clanMembers().size();
+
         Asalto asaltoReciente = asaltoService.orderFecha().get(0);
-        String dirLiga = "";
-        if (asaltoReciente.getCopasCapital() >= 0)
-            dirLiga = "no";
-        if (asaltoReciente.getCopasCapital() >= 400)
-            dirLiga = "bronze";
-        if (asaltoReciente.getCopasCapital() >= 800)
-            dirLiga = "silver";
-        if (asaltoReciente.getCopasCapital() >= 1400)
-            dirLiga = "gold";
-        if (asaltoReciente.getCopasCapital() >= 2000)
-            dirLiga = "cristal";
-        if (asaltoReciente.getCopasCapital() >= 2600)
-            dirLiga = "maestro";
-        if (asaltoReciente.getCopasCapital() >= 3200)
-            dirLiga = "campeon";
-        if (asaltoReciente.getCopasCapital() >= 4100)
-            dirLiga = "titan";
-        if (asaltoReciente.getCopasCapital() >= 5000)
-            dirLiga = "leyenda";
+
+        String dirLiga = asaltoService.ligaImagenPorCopas(asaltoReciente.getCopasCapital());
+        String ligaActual =asaltoService.ligaPorCopas(asaltoReciente.getCopasCapital());
+        String Evaluation =asaltoService.evaluation(trabajadores.size(), gamerService.clanMembers().size());
+
+        DecimalFormat df =new DecimalFormat("0.0");
+    
 
         result.addObject("morosos", morosos);
         result.addObject("avisar", avisar);
+        result.addObject("trabajadores", trabajadores);
         result.addObject("ratioAtacanteOro", ratioAtacanteOro);
         result.addObject("ratioAtacanteMonedas", ratioAtacanteMonedas);
         result.addObject("progresoCopas", progresoCopas);
         result.addObject("asaltoReciente", asaltoService.orderFecha().get(0));
         result.addObject("dirLiga", dirLiga);
+        result.addObject("ligaActual", ligaActual);
+        result.addObject("evaluation", Evaluation);
+        result.addObject("porcentaje", df.format(porcentaje*100));
+        result.addObject("porcentajePuro", porcentaje);
         return result;
     }
 }

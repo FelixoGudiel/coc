@@ -18,6 +18,8 @@ import java.net.URL;
 import com.japarejo.springmvc.gamer.Gamer;
 import com.japarejo.springmvc.gamerRecord.GamerRecord;
 
+import lombok.val;
+
 @Service
 public class AsaltoService {
 
@@ -168,7 +170,7 @@ public class AsaltoService {
         Integer numMonedas = 0;
         for (Integer i = 0; i <= semanas - 1; i++) {
             numAtacantes = numAtacantes + orderFecha().get(i).getGamerRecord().size();
-            numMonedas = numMonedas + orderFecha().get(i).getOroCapital();
+            numMonedas = numMonedas + orderFecha().get(i).getMonedasGanadas();
         }
         return (numMonedas / numAtacantes) / (semanas);
     }
@@ -179,6 +181,98 @@ public class AsaltoService {
         return (incrementoCopas);
     }
 
+    public String ligaImagenPorCopas(Integer copas) {
+        String dirLiga = "";
+        if (copas >= 0)
+            dirLiga = "no";
+        if (copas >= 400)
+            dirLiga = "bronze";
+        if (copas>= 800)
+            dirLiga = "silver";
+        if (copas >= 1400)
+            dirLiga = "gold";
+        if (copas >= 2000)
+            dirLiga = "cristal";
+        if (copas >= 2600)
+            dirLiga = "maestro";
+        if (copas >= 3200)
+            dirLiga = "campeon";
+        if (copas >= 4100)
+            dirLiga = "titan";
+        if (copas >= 5000)
+            dirLiga = "leyenda";
+        return dirLiga;
+    }
+
+    public String ligaPorCopas(Integer copas) {
+        String Liga = "";
+        if (copas >= 0)
+        Liga = "ninguna liga";
+        if (copas >= 400)
+        Liga = "Bronce III";
+        if (copas>= 500)
+        Liga = "Bronce II";
+        if (copas >= 600)
+        Liga = "Bronce I";
+        if (copas >= 800)
+        Liga = "Plata III";
+        if (copas >= 100)
+        Liga = "Plata II";
+        if (copas >= 1200)
+        Liga = "Plata I";
+        if (copas >= 1400)
+        Liga = "Oro III";
+        if (copas >= 1600)
+        Liga = "Oro II";
+        if (copas >= 1800)
+        Liga = "Oro I";
+        if (copas >= 2000)
+        Liga = "Cristal III";
+        if (copas>= 2200)
+        Liga = "Cristal II";
+        if (copas >= 2400)
+        Liga = "Cristal I";
+        if (copas >= 2600)
+        Liga = "Maestro III";
+        if (copas >= 2800)
+        Liga = "Maestro II";
+        if (copas >= 3000)
+        Liga = "Maestro I";
+        if (copas >= 3200)
+        Liga = "Campeon III";
+        if (copas >= 3500)
+        Liga = "Campeon II";
+        if (copas >= 3800)
+        Liga = "Campeon I";
+        if (copas >= 4100)
+        Liga = "Titan III";
+        if (copas>= 4400)
+        Liga = "Titan II";
+        if (copas >= 4700)
+        Liga = "Titan I";
+        if (copas >= 5000)
+        Liga = "Leyenda";
+        return Liga;
+    }
+    public String evaluation(Integer activos, Integer totales) {
+        Double inner = Math.exp((-activos+totales*0.7)/(totales*0.07));
+        Double value = (1/(1+inner)) + 0.014;
+        String text = "Es necesario purgar jugadores inactivos";
+        if (value>0.5){
+            text = "El rendimiento es insuficiente";
+        }
+        if (value>0.8){
+            text = "El rendimiento es aceptable";
+        }
+        if (value>0.9){
+            text = "Casi todos los miembros atacan";
+        }
+        if (value==1){
+            text = "Todos los miembros han atacado!";
+        }
+        return text;
+    }
+    
     @Transactional
     public void save(Asalto asalto) {
         asaltoRepo.save(asalto);

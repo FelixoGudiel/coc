@@ -182,7 +182,7 @@
 												width="20" height="20" /></span>
 										</th>
 										<th>
-											Nº Atacantes
+											N Atacantes
 										</th>
 									</tr>
 									<c:forEach items="${asaltos}" var="asalto">

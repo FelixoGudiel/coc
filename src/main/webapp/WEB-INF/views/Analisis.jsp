@@ -66,7 +66,25 @@
 						.der {
 							position: relative;
 							animation-name: der;
-							animation-duration: 5s;
+							animation-duration: 3s;
+							height: auto;
+							width: auto;
+							float: right;
+						}
+
+						.der1 {
+							position: relative;
+							animation-name: der1;
+							animation-duration: 3.1s;
+							height: auto;
+							width: auto;
+							float: right;
+						}
+
+						.der2 {
+							position: relative;
+							animation-name: der2;
+							animation-duration: 3.3s;
 							height: auto;
 							width: auto;
 							float: right;
@@ -78,7 +96,41 @@
 								top: 0px;
 							}
 
-							30% {
+							50% {
+								left: 2000px;
+								top: 0px;
+							}
+
+							100% {
+								left: 0px;
+								top: 0px;
+							}
+						}
+
+						@keyframes der1 {
+							0% {
+								left: 2000px;
+								top: 0px;
+							}
+
+							48.387096774% {
+								left: 2000px;
+								top: 0px;
+							}
+
+							100% {
+								left: 0px;
+								top: 0px;
+							}
+						}
+
+						@keyframes der2 {
+							0% {
+								left: 2000px;
+								top: 0px;
+							}
+
+							45.454545454% {
 								left: 2000px;
 								top: 0px;
 							}
@@ -141,7 +193,9 @@
 							position: relative;
 							animation-name: meneillo;
 							animation-duration: 0.5s;
-							animation-delay: 4s;
+							animation-delay: 5s;
+							transition-duration: 0.5s;
+
 						}
 
 						@keyframes meneillo {
@@ -163,6 +217,37 @@
 
 							100% {
 								transform: rotate(0deg);
+							}
+						}
+
+						.subida {
+							height: ${200*porcentajePuro}px;
+							width: 60px;
+							background-color: rgb(81, 171, 255);
+							float: right;
+							left: 600px;
+							bottom: 0;
+							animation-name: subida;
+							position: absolute;
+							animation-duration: 8s;
+							overflow-y: hidden;
+							border-style: solid;
+							border-color: black;
+							border-width: 2px
+						}
+
+						@keyframes subida {
+							0% {
+								height: 0px;
+
+							}
+
+							50% {
+								height: 0px;
+							}
+
+							100% {
+								height: ${200*porcentajePuro}px;
 							}
 						}
 					</style>
@@ -234,7 +319,7 @@
 
 								<div class="der">
 									<div
-										style="height:200px; background-color:rgb(255, 173, 96); width: 700px; border-radius: 20px;position: relative;">
+										style="height:200px; background-color:#7bed64; width: 700px; border-radius: 20px;position: relative;">
 										<spring:url value="/resources/images/ligas/${dirLiga}.png" htmlEscape="true"
 											var="logoImage" />
 										<img src="${logoImage}" class="meneillo"
@@ -242,11 +327,85 @@
 										<spring:url value="/resources/images/trofeo.png" htmlEscape="true" var="copa" />
 										<div style="left: 200px;, top: 10px; position: relative; float:left">
 											<h2> ${asaltoReciente.copasCapital}<span><img src="${copa}"
-														style="margin-top: -10px; margin-right: 5px;" width="30" /></span></h2>
+														style="margin-top: -10px; margin-right: 5px;"
+														width="30" /></span></h2>
+										</div>
+										<div style="position: relative; top: 80px; left: -50px;">
+											<h1>Actualmente en ${ligaActual}</h1>
+											<c:if test="${progresoCopas!=0}">
+												<h2>Hemos obtenido ${progresoCopas}<span><img src="${copa}"
+															style="margin-top: -10px; margin-right: 5px;"
+															width="30" /></span></h2>
+											</c:if>
 										</div>
 									</div>
+								</div>
+								<div class="der1">
+									<div
+										style="height:200px; background-color:#be64d4; width: 700px; border-radius: 20px;position: relative;">
+										<div style="width: 0; 
+										height: 0; 
+										border-left: 150px solid transparent;
+										border-right: 150px solid #a8a8a8;
+										border-bottom: 200px solid #a8a8a8;
+										position: absolute;
+										left: 275px;">
+										</div>
+										<div
+											style="background-color: #a8a8a8;float: right ; width: 275px; border-radius: 20px;position: relative; height:200px">
+											<spring:url value="/resources/images/raid_medal_mini.png" htmlEscape="true"
+												var="gris" />
+											<h2
+												style="right: 25px ; top: -10px;position: relative;align-self: center; float: right;">
+												Medallas ganadas:</h2>
+											<h2 style="right: 200px ; top: -20px;position: relative;float: right; ">
+												${asaltoReciente.monedasGanadas}<span><img src="${gris}"
+														style=" margin-left: 10px;" width="30" /></span></h2>
+											<h3
+												style="right: 90px ; top: -3px;position: relative; align-self: center; overflow-x: hidden; width: 2000px;">
+												Medallas por atacante:</h3>
+											<h3 style="right: 80px ; top: -20px;position: relative; ">
+												${ratioAtacanteMonedas}<span><img src="${gris}"
+														style=" margin-left: 10px;" width="25" /></span></h3>
+											<img src="${gris}" class="meneillo"
+												style="margin-top: 0px; margin-right: 5px; height: 100px; right: 0px; position: absolute; top: 90px; float:left">
+										</div>
+										<spring:url value="/resources/images/capital_gold_mini.png" htmlEscape="true"
+											var="oro" />
+										<img src="${oro}" class="meneillo"
+											style="margin-top: 0px; margin-right: 5px; height: 100px; left: 10px; position: relative; top: 20px; float:left">
+										<h2 style="left: 30px ; top: 10px;position: relative;align-self: center; ">
+											Oro ganado:</h2>
+										<h2 style="left: 50px ; top: 10px;position: relative; ">
+											${asaltoReciente.oroCapital}<span><img src="${oro}"
+													style=" margin-left: 10px;" width="30" /></span></h2>
+										<h3 style="left: 15px ; top: 15px;position: relative; ">
+											Oro ganado por atacante:</h3>
+										<h3 style="left: 30px ; top: 0px;position: relative; ">
+											${ratioAtacanteOro}<span><img src="${oro}" style=" margin-left: 10px;"
+													width="25" /></span></h3>
 
 
+									</div>
+								</div>
+								<div class="der2">
+									<div
+										style="height:200px; background-color:#FFEF6F; width: 700px; border-radius: 20px;position: relative;">
+										<div
+											style="height: 200px; width: 60px;  background-color: gray; float:right; left: 600px; position: absolute; border-style: solid; border-color:  black;  border-width: 2px">
+										</div>
+										<div class="subida"></div>
+										<spring:url value="/resources/images/people.png" htmlEscape="true"
+											var="people" />
+										<img src="${people}" class="meneillo"
+											style=" margin-right: 50px; height: 100px; left: 10px; position: relative; top: 0px; float:left">
+										<h2 style="top:5px">Miembros totales:
+											${trabajadores.size()+morosos.size()+avisar.size()}</h2>
+										<h2>Miembros activos: ${trabajadores.size()}</h2>
+										<h2>Porcentaje de activos: ${porcentaje}%</h2>
+										<h2>${evaluation}</h2>
+
+									</div>
 								</div>
 					</body>
 
