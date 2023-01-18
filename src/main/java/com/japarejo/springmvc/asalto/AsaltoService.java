@@ -17,6 +17,7 @@ import java.net.URL;
 
 import com.japarejo.springmvc.gamer.Gamer;
 import com.japarejo.springmvc.gamerRecord.GamerRecord;
+import com.japarejo.springmvc.gamerRecord.GamerRecordRepository;
 
 import lombok.val;
 
@@ -25,6 +26,8 @@ public class AsaltoService {
 
     @Autowired
     private AsaltoRepository asaltoRepo;
+    @Autowired
+    private GamerRecordRepository gamerRecordRepo;
 
     public String asaltoAPI() throws IOException {
         try {
@@ -141,6 +144,10 @@ public class AsaltoService {
 
     public List<Asalto> orderFecha() {
         return asaltoRepo.orderFecha();
+    }
+
+    public List<GamerRecord> orderGanancia(Asalto asalto) {
+        return gamerRecordRepo.orderGanancia(asalto);
     }
 
     public List<Gamer> trabajadores(Integer semanas) {

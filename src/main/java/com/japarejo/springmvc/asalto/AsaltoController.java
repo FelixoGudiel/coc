@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.japarejo.springmvc.gamer.Gamer;
 import com.japarejo.springmvc.gamer.GamerService;
+import com.japarejo.springmvc.gamerRecord.GamerRecord;
 import com.japarejo.springmvc.gamerRecord.GamerRecordService;
 
 import javassist.expr.NewArray;
@@ -111,7 +112,7 @@ public class AsaltoController {
         String dirLiga = asaltoService.ligaImagenPorCopas(asaltoReciente.getCopasCapital());
         String ligaActual =asaltoService.ligaPorCopas(asaltoReciente.getCopasCapital());
         String Evaluation =asaltoService.evaluation(trabajadores.size(), gamerService.clanMembers().size());
-
+        List<GamerRecord> orderBeneficio = asaltoService.orderGanancia(asaltoReciente);
         DecimalFormat df =new DecimalFormat("0.0");
     
 
@@ -127,6 +128,7 @@ public class AsaltoController {
         result.addObject("evaluation", Evaluation);
         result.addObject("porcentaje", df.format(porcentaje*100));
         result.addObject("porcentajePuro", porcentaje);
+        result.addObject("orderBeneficio", orderBeneficio);
         return result;
     }
 }

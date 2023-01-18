@@ -267,7 +267,7 @@
 							<div style="float: left; width: 100%;">
 								<div class="izq">
 									<table class="table table-bordered"
-										style="float: left;  height: 700px; width: 100px; overflow-y: hidden; border-radius: 6px; border-width: 2px; border-color: black;">
+										style="float: left;  height: 450px; width: 100px; overflow-y: hidden; border-radius: 6px; border-width: 2px; border-color: black;">
 										<colgroup>
 											<col style="background-color: #ED6467;">
 										</colgroup>
@@ -292,7 +292,7 @@
 										</c:forEach>
 									</table>
 									<table class="table table-bordered"
-										style="float: left;  height: 700px; width: 100px; overflow-y: hidden; border-radius: 6px; border-width: 2px 2px 2px 0; border-color: black;">
+										style="float: left;  height: 450px; width: 100px; overflow-y: hidden; border-radius: 6px; border-width: 2px 2px 2px 0; border-color: black;">
 										<colgroup>
 											<col style="background-color: #FFEF6F;">
 										</colgroup>
@@ -315,6 +315,25 @@
 												</td>
 										</c:forEach>
 									</table>
+									<div
+										style="position: absolute; height: 200px; width: 330px; border-radius: 20px; background-color: #6cd7f8; top: 450px;">
+										<spring:url value="/resources/images/capital_gold_mini.png" htmlEscape="true"
+											var="oro" />
+										<h2 style="position: relative; top: -10px;left:10px">Mejores miembros:</h2>
+										<h3 style="position: relative; top: -10px;left:10px">${orderBeneficio[0].gamer.nombre} - ${orderBeneficio[0].beneficioObtenido} <span><img src="${oro}"
+											style="margin-right: 5px;"
+											width="20" /></span>
+										</h3>
+										<h3 style="position: relative; top: -10px;left:10px">${orderBeneficio[1].gamer.nombre} - ${orderBeneficio[1].beneficioObtenido} <span><img src="${oro}"
+											style=" margin-right: 5px;"
+											width="20" /></span>
+										</h3>
+										<h3 style="position: relative; top: -10px; left:10px;">${orderBeneficio[2].gamer.nombre} - ${orderBeneficio[2].beneficioObtenido} <span><img src="${oro}"
+											style=" margin-right: 5px;"
+											width="20" /></span>
+										</h3>
+									</div>
+
 								</div>
 
 								<div class="der">
@@ -362,7 +381,7 @@
 												${asaltoReciente.monedasGanadas}<span><img src="${gris}"
 														style=" margin-left: 10px;" width="30" /></span></h2>
 											<h3
-												style="right: 90px ; top: -3px;position: relative; align-self: center; overflow-x: hidden; width: 2000px;">
+												style="right: 90px ; top: -3px;position: relative; align-self: center; overflow-x: hidden; width: 750px;">
 												Medallas por atacante:</h3>
 											<h3 style="right: 80px ; top: -20px;position: relative; ">
 												${ratioAtacanteMonedas}<span><img src="${gris}"
@@ -407,6 +426,8 @@
 
 									</div>
 								</div>
+							</div>
+						</div>
 					</body>
 
 					</ocaParchis:layout>
