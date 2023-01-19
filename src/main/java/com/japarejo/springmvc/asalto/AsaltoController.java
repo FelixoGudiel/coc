@@ -92,7 +92,7 @@ public class AsaltoController {
             result.addObject("message", "No hay suficientes asaltos");
             return result;
         }
-        // gamerService.clanAPI();
+        gamerService.clanAPI();
         List<String> morosos = new ArrayList<>();
         List<String> avisar = new ArrayList<>();
         List<Gamer> trabajadores = asaltoService.trabajadores(semanas);
