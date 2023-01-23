@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface KeyRepository extends CrudRepository<apiKey, Integer> {
     List<apiKey> findAll();
-@Query("SELECT k FROM apiKey k WHERE k.active")
+@Query("SELECT k FROM apiKey k WHERE k.activa=true")
 apiKey keyActiva();
 }
 

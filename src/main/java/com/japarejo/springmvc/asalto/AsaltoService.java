@@ -19,7 +19,6 @@ import com.japarejo.springmvc.gamer.Gamer;
 import com.japarejo.springmvc.gamerRecord.GamerRecord;
 import com.japarejo.springmvc.gamerRecord.GamerRecordRepository;
 
-import lombok.val;
 
 @Service
 public class AsaltoService {
@@ -146,8 +145,15 @@ public class AsaltoService {
         return asaltoRepo.orderFecha();
     }
 
-    public List<GamerRecord> orderGanancia(Asalto asalto) {
-        return gamerRecordRepo.orderGanancia(asalto);
+    public List<GamerRecord> orderGanancia(Integer semanas) {
+        if (semanas == 1)
+        return gamerRecordRepo.orderGanancia(orderFecha().get(0),null, null);
+        if (semanas == 2)
+        return gamerRecordRepo.orderGanancia(orderFecha().get(0),orderFecha().get(1), null);
+        if (semanas == 3)
+        return gamerRecordRepo.orderGanancia(orderFecha().get(0),orderFecha().get(1), orderFecha().get(2));
+        return null;
+
     }
 
     public List<Gamer> trabajadores(Integer semanas) {
@@ -169,7 +175,7 @@ public class AsaltoService {
             numAtacantes = numAtacantes + orderFecha().get(i).getGamerRecord().size();
             numOro = numOro + orderFecha().get(i).getOroCapital();
         }
-        return (numOro / numAtacantes) / (semanas);
+        return (numOro / numAtacantes);
     }
 
     public Integer ratioAtacanteMonedas(Integer semanas) {
@@ -179,8 +185,24 @@ public class AsaltoService {
             numAtacantes = numAtacantes + orderFecha().get(i).getGamerRecord().size();
             numMonedas = numMonedas + orderFecha().get(i).getMonedasGanadas();
         }
-        return (numMonedas / numAtacantes) / (semanas);
+        return (numMonedas / numAtacantes);
     }
+    public Integer totalOro(Integer semanas) {
+        Integer totalOro = 0;
+        for (Integer i = 0; i <= semanas - 1; i++) {
+           totalOro=totalOro+orderFecha().get(i).getOroCapital();
+        }
+        return totalOro;
+    }
+
+    public Integer totalMonedas(Integer semanas) {
+        Integer totalMonedas = 0;
+        for (Integer i = 0; i <= semanas - 1; i++) {
+           totalMonedas=totalMonedas+orderFecha().get(i).getMonedasGanadas();
+        }
+        return totalMonedas;
+    }
+
 
     public Integer progresoCopas(Integer semanas) {
         Integer incrementoCopas = orderFecha().get(0).getCopasCapital()

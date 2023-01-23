@@ -17,7 +17,6 @@ import com.japarejo.springmvc.gamer.GamerService;
 import com.japarejo.springmvc.gamerRecord.GamerRecord;
 import com.japarejo.springmvc.gamerRecord.GamerRecordService;
 
-import javassist.expr.NewArray;
 
 @Controller
 @RequestMapping("/asaltos")
@@ -87,7 +86,7 @@ public class AsaltoController {
     @GetMapping("/analisis/{semanas}")
     public ModelAndView analisisAsaltos(@PathVariable("semanas") Integer semanas) throws IOException {
         ModelAndView result = new ModelAndView(ASALTO_ANALISIS);
-        if (asaltoService.findAll().size() == 0) {
+        if (asaltoService.findAll().size() < semanas) {
             result = new ModelAndView("redirect:/asaltos");
             result.addObject("message", "No hay suficientes asaltos");
             return result;
@@ -112,8 +111,11 @@ public class AsaltoController {
         String dirLiga = asaltoService.ligaImagenPorCopas(asaltoReciente.getCopasCapital());
         String ligaActual =asaltoService.ligaPorCopas(asaltoReciente.getCopasCapital());
         String Evaluation =asaltoService.evaluation(trabajadores.size(), gamerService.clanMembers().size());
-        List<GamerRecord> orderBeneficio = asaltoService.orderGanancia(asaltoReciente);
+        List<GamerRecord> orderBeneficio = asaltoService.orderGanancia(semanas);
         DecimalFormat df =new DecimalFormat("0.0");
+
+        Integer totalOro = asaltoService.totalOro(semanas);
+        Integer totalMonedas = asaltoService.totalMonedas(semanas);
     
 
         result.addObject("morosos", morosos);
@@ -129,6 +131,9 @@ public class AsaltoController {
         result.addObject("porcentaje", df.format(porcentaje*100));
         result.addObject("porcentajePuro", porcentaje);
         result.addObject("orderBeneficio", orderBeneficio);
+        result.addObject("semanas", semanas);
+        result.addObject("totalOro", totalOro);
+        result.addObject("totalMonedas", totalMonedas);
         return result;
     }
 }
