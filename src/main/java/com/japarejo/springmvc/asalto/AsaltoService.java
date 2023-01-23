@@ -296,7 +296,7 @@ public class AsaltoService {
         if (value>0.9){
             text = "Casi todos los miembros atacan";
         }
-        if (value==1){
+        if (value>=0.9999999){
             text = "Todos los miembros han atacado!";
         }
         return text;

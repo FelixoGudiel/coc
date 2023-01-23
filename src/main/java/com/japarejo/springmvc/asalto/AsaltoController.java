@@ -105,6 +105,7 @@ public class AsaltoController {
         Integer ratioAtacanteMonedas = asaltoService.ratioAtacanteMonedas(semanas);
         Integer progresoCopas = asaltoService.progresoCopas(semanas);
         Double porcentaje = (double)trabajadores.size()/gamerService.clanMembers().size();
+        if (porcentaje>1) porcentaje=1.;
 
         Asalto asaltoReciente = asaltoService.orderFecha().get(0);
 
