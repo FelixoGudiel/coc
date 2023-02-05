@@ -1,5 +1,7 @@
 package com.japarejo.springmvc.apiKey;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,10 @@ public class KeyService {
 
     public apiKey keyActiva(){
         return keyRepo.keyActiva();
+    }
+
+    public List<apiKey> findAll(){
+        return keyRepo.findAll();
     }
     
     @Transactional
