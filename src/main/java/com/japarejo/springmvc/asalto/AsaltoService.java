@@ -27,11 +27,11 @@ public class AsaltoService {
     private AsaltoRepository asaltoRepo;
     @Autowired
     private GamerRecordRepository gamerRecordRepo;
-
+    private String apiKey= "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjE4MGVhYTJmLWYxYTUtNGM1MC04MDlmLTM2MzhjMmZkNjgwZSIsImlhdCI6MTY4MDUyMzE3OCwic3ViIjoiZGV2ZWxvcGVyL2IyYWJiMGZhLTBmZjAtNjdjMC0xZjIxLTBjNWIzMjNhNjczMiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjgxLjM2LjE3OC4yNDIiXSwidHlwZSI6ImNsaWVudCJ9XX0.jF7xNUbvNILlnvW_xWqe0QzAzKubVoAJS7iS4NdKxNwsTDzyqCLK4VJljlek6_vmzJ6QFTwsAXfwE0HOLA5qQg";
     public String asaltoAPI() throws IOException {
         try {
             URL url = new URL(
-                    "https://api.clashofclans.com/v1/clans/%232LPQV9YP0/capitalraidseasons?authorization=Bearer:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjlhN2Y3ZGNjLTY1ZWMtNDhiYi1iYWRjLWZlYjcyZjBkMGY1ZSIsImlhdCI6MTY3NTM1MjI4NCwic3ViIjoiZGV2ZWxvcGVyL2IyYWJiMGZhLTBmZjAtNjdjMC0xZjIxLTBjNWIzMjNhNjczMiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjgxLjM2LjIyMS41NiJdLCJ0eXBlIjoiY2xpZW50In1dfQ.Whr2rBlTzCD6Db65OfPo1v2EX5tFeUkVKpaTSXl3OduXlhTdWkiyhUF3hzZox4_e6wVIckI5psqXgJCk4yAVNA");
+                    "https://api.clashofclans.com/v1/clans/%232LPQV9YP0/capitalraidseasons?authorization=Bearer:"+apiKey);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
@@ -53,7 +53,7 @@ public class AsaltoService {
     public Integer copasAPI() throws IOException {
         try {
             URL url = new URL(
-                    "https://api.clashofclans.com/v1/clans/%232LPQV9YP0?authorization=Bearer:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjlhN2Y3ZGNjLTY1ZWMtNDhiYi1iYWRjLWZlYjcyZjBkMGY1ZSIsImlhdCI6MTY3NTM1MjI4NCwic3ViIjoiZGV2ZWxvcGVyL2IyYWJiMGZhLTBmZjAtNjdjMC0xZjIxLTBjNWIzMjNhNjczMiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjgxLjM2LjIyMS41NiJdLCJ0eXBlIjoiY2xpZW50In1dfQ.Whr2rBlTzCD6Db65OfPo1v2EX5tFeUkVKpaTSXl3OduXlhTdWkiyhUF3hzZox4_e6wVIckI5psqXgJCk4yAVNA");
+                    "https://api.clashofclans.com/v1/clans/%232LPQV9YP0?authorization=Bearer:"+apiKey);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();

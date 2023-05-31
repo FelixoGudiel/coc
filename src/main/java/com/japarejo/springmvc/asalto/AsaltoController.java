@@ -96,7 +96,7 @@ public class AsaltoController {
         List<String> avisar = new ArrayList<>();
         List<Gamer> trabajadores = asaltoService.trabajadores(semanas);
         for (Gamer g : gamerService.clanMembers()) {
-            if (!trabajadores.contains(g) && g.getEtiqueta().equals("Desconocido") && g.getRol().equals("member"))
+            if (!trabajadores.contains(g) && g.getEtiqueta().equals("Desconocido"))
                 morosos.add(g.getNombre());
             if (!trabajadores.contains(g) && !g.getEtiqueta().equals("Desconocido"))
                 avisar.add(g.getNombre());
