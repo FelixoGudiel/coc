@@ -27,8 +27,7 @@ public class AsaltoService {
     private AsaltoRepository asaltoRepo;
     @Autowired
     private GamerRecordRepository gamerRecordRepo;
-    private String apiKey= "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjE4MGVhYTJmLWYxYTUtNGM1MC04MDlmLTM2MzhjMmZkNjgwZSIsImlhdCI6MTY4MDUyMzE3OCwic3ViIjoiZGV2ZWxvcGVyL2IyYWJiMGZhLTBmZjAtNjdjMC0xZjIxLTBjNWIzMjNhNjczMiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjgxLjM2LjE3OC4yNDIiXSwidHlwZSI6ImNsaWVudCJ9XX0.jF7xNUbvNILlnvW_xWqe0QzAzKubVoAJS7iS4NdKxNwsTDzyqCLK4VJljlek6_vmzJ6QFTwsAXfwE0HOLA5qQg";
-    public String asaltoAPI() throws IOException {
+    private String apiKey= "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImQ1NWYzM2RiLWY3MTUtNDg1MC1iMDM5LWViOTUyZjhiNWRmMiIsImlhdCI6MTcwMDA1MDUyNywic3ViIjoiZGV2ZWxvcGVyL2IyYWJiMGZhLTBmZjAtNjdjMC0xZjIxLTBjNWIzMjNhNjczMiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjgxLjM2LjE4NC4xOSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.vvtOQYzRCP-C1iy1mccnldnoyaw-YeoNOKSm5LhqSta5iOdssbFP0fzTJD6PkR0b5EzJEAdNEkJ6yoWfjlQpyw";    public String asaltoAPI() throws IOException {
         try {
             URL url = new URL(
                     "https://api.clashofclans.com/v1/clans/%232LPQV9YP0/capitalraidseasons?authorization=Bearer:"+apiKey);

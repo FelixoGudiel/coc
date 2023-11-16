@@ -147,13 +147,13 @@
 								;" href="/asaltos/addAsalto">Actualizar</a>
 
 								<div class="der lento">
-									<a class="btn btn-success" href="/asaltos/analisis/1">Analisis</a>
+									<a class="btn btn-success" href="/asaltos/analisis/2">Analisis</a>
 								</div>
 
 							</div>
 							<br>
 							
-							<div class="izq" style="overflow-y:hidden ; overflow-x: hidden; height: 700px;">
+							<div class="izq" style="overflow-y:scroll ; overflow-x: hidden; height: 700px;">
 								<table class="table table-striped" style="width: 500px;">
 									<tr>
 										<th>Fecha</th>
